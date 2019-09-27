@@ -174,7 +174,8 @@ namespace Tic_Tac_Tor
         
         private void Form1_Load(object sender, EventArgs e)
         {                       
-            reset();           
+            reset();
+            
         }
 
         public void reset()
@@ -187,6 +188,7 @@ namespace Tic_Tac_Tor
                 b.BackgroundImage = null;
                 b.Enabled = true;
                 b.XO = null;
+                b.TabStop = false;
                 
             }
             canClick = true;
