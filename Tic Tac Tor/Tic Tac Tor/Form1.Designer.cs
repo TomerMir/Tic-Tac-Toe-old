@@ -32,24 +32,24 @@
             this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.D4 = new System.Windows.Forms.Button();
-            this.D3 = new System.Windows.Forms.Button();
-            this.D2 = new System.Windows.Forms.Button();
-            this.D1 = new System.Windows.Forms.Button();
-            this.C4 = new System.Windows.Forms.Button();
-            this.C3 = new System.Windows.Forms.Button();
-            this.C2 = new System.Windows.Forms.Button();
-            this.C1 = new System.Windows.Forms.Button();
-            this.B4 = new System.Windows.Forms.Button();
-            this.B3 = new System.Windows.Forms.Button();
-            this.B2 = new System.Windows.Forms.Button();
-            this.B1 = new System.Windows.Forms.Button();
-            this.A1 = new System.Windows.Forms.Button();
-            this.A2 = new System.Windows.Forms.Button();
-            this.A3 = new System.Windows.Forms.Button();
-            this.A4 = new System.Windows.Forms.Button();
+            this.D4 = new Tic_Tac_Tor.TTTButton();
+            this.D3 = new Tic_Tac_Tor.TTTButton();
+            this.D2 = new Tic_Tac_Tor.TTTButton();
+            this.D1 = new Tic_Tac_Tor.TTTButton();
+            this.C4 = new Tic_Tac_Tor.TTTButton();
+            this.C3 = new Tic_Tac_Tor.TTTButton();
+            this.C2 = new Tic_Tac_Tor.TTTButton();
+            this.C1 = new Tic_Tac_Tor.TTTButton();
+            this.B4 = new Tic_Tac_Tor.TTTButton();
+            this.B3 = new Tic_Tac_Tor.TTTButton();
+            this.B2 = new Tic_Tac_Tor.TTTButton();
+            this.B1 = new Tic_Tac_Tor.TTTButton();
+            this.A1 = new Tic_Tac_Tor.TTTButton();
+            this.A2 = new Tic_Tac_Tor.TTTButton();
+            this.A3 = new Tic_Tac_Tor.TTTButton();
+            this.A4 = new Tic_Tac_Tor.TTTButton();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -57,8 +57,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.applicationToolStripMenuItem,
-            this.gameToolStripMenuItem});
+            this.applicationToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(427, 24);
@@ -77,7 +76,7 @@
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.newGameToolStripMenuItem.Text = "New Game";
             this.newGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameToolStripMenuItem_Click);
             // 
@@ -87,12 +86,6 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
-            // 
-            // gameToolStripMenuItem
-            // 
-            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.gameToolStripMenuItem.Text = "Game";
             // 
             // tableLayoutPanel1
             // 
@@ -238,6 +231,7 @@
             // A1
             // 
             this.A1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.A1.ForeColor = System.Drawing.Color.Transparent;
             this.A1.Location = new System.Drawing.Point(3, 3);
             this.A1.Name = "A1";
             this.A1.Size = new System.Drawing.Size(100, 100);
@@ -272,16 +266,28 @@
             this.A4.UseVisualStyleBackColor = true;
             this.A4.Click += new System.EventHandler(this.button_click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(96, 4);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(92, 17);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "Show Options";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(427, 450);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Tic Tac Toe By Tomer";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -295,26 +301,31 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem applicationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button D4;
-        private System.Windows.Forms.Button D3;
-        private System.Windows.Forms.Button D2;
-        private System.Windows.Forms.Button D1;
-        private System.Windows.Forms.Button C4;
-        private System.Windows.Forms.Button C3;
-        private System.Windows.Forms.Button C2;
-        private System.Windows.Forms.Button C1;
-        private System.Windows.Forms.Button B4;
-        private System.Windows.Forms.Button B3;
-        private System.Windows.Forms.Button B2;
-        private System.Windows.Forms.Button B1;
-        private System.Windows.Forms.Button A1;
-        private System.Windows.Forms.Button A2;
-        private System.Windows.Forms.Button A3;
-        private System.Windows.Forms.Button A4;
+        private TTTButton D4;
+        private TTTButton D3;
+        private TTTButton D2;
+        private TTTButton D1;
+        private TTTButton C4;
+        private TTTButton C3;
+        private TTTButton C2;
+        private TTTButton C1;
+        private TTTButton B4;
+        private TTTButton B3;
+        private TTTButton B2;
+        private TTTButton B1;
+        private TTTButton A1;
+        private TTTButton A2;
+        private TTTButton A3;
+        private TTTButton A4;
         private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox1;
+    }
+
+    class TTTButton : System.Windows.Forms.Button
+    {
+        public string XO; 
     }
 }
 
