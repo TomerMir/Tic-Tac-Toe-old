@@ -22,50 +22,67 @@ namespace Tic_Tac_Tor
         {
             Application.Exit();
         }
-
+        int whoWins = 0;
+        bool canClick = true;
         int player_count = 0;
-
+        List<TTTButton> replay = new List<TTTButton>();
         private void button_click(object sender, EventArgs e)
-        {
-            TTTButton button = sender as TTTButton;
+        {                 
+            if(canClick == false)
+            {
+                return;
+            }
+                TTTButton button = sender as TTTButton;
             player_count++;
                        
             button.XO = "X";
             button.BackgroundImage = Tic_Tac_Tor.Properties.Resources.redO;
             button.Enabled = false;
-
-            
+            replay.Add(button);
+                          
             if (checkForAWinner())
-            {                              
+            {
+                canClick = false;
+                whoWins = 1;
                 MessageBox.Show("Player O is the winner", "We have a winner");
-                reset();
+                replayButton.Show();
+                continuePlaying.Show();
             }
             
             if (player_count==16 && checkForAWinner() == false)
             {
+                canClick = false;
+                whoWins = 2;
                 MessageBox.Show("It's a draw", "draw");
-                reset();
+                replayButton.Show();
+                continuePlaying.Show();
             }
 
             ComputerTurn();
 
             if (checkForAWinner())
             {
+                canClick = false;
+                whoWins = 3;
                 MessageBox.Show("Player X is the winner", "We have a winner");
-                reset();
+                replayButton.Show();
+                continuePlaying.Show();
             }
 
             if (player_count == 16 && checkForAWinner() == false)
             {
+                canClick = false;
+                whoWins = 2;
                 MessageBox.Show("It's a draw", "draw");
-                reset();
+                replayButton.Show();
+                continuePlaying.Show();
+                
             }
         }
 
         public void ComputerTurn()
         {
-
-
+            canClick = false;
             foreach (Control c in tableLayoutPanel1.Controls)
             {
                 TTTButton b = c as TTTButton;
@@ -84,6 +101,8 @@ namespace Tic_Tac_Tor
                         b.BackgroundImage = Tic_Tac_Tor.Properties.Resources.redX;
                         b.Enabled = false;
                         player_count++;
+                        replay.Add(b);
+                        canClick = true;
                         return;
                     }
                     else
@@ -104,6 +123,8 @@ namespace Tic_Tac_Tor
                         b.Enabled = false;
                         b.XO = "O";
                         player_count++;
+                        replay.Add(b);
+                        canClick = true;
                         return;
                     }
                     else
@@ -141,19 +162,19 @@ namespace Tic_Tac_Tor
                     b.XO = "O";
                     b.Enabled = false;                    
                     player_count++;
+                    replay.Add(b);
+                    canClick = true;
                     return;
                 }
                 anotherTmp++;
             }
 
         }
-        
 
+        
         private void Form1_Load(object sender, EventArgs e)
-        {
-                        
-            reset();
-            
+        {                       
+            reset();           
         }
 
         public void reset()
@@ -168,8 +189,12 @@ namespace Tic_Tac_Tor
                 b.XO = null;
                 
             }
+            canClick = true;
             player_count = 0;
-            
+            replayButton.Hide();
+            continuePlaying.Hide();
+            replay.Clear();
+            whoWins = 0;
         }
 
 
@@ -195,6 +220,61 @@ namespace Tic_Tac_Tor
             }
             
         }
+        private void ReplayButton_Click(object sender, EventArgs e)
+        {
+            checkBox1.Hide();
+            continuePlaying.Hide();
+            replayButton.Hide();
+            foreach (Control c in tableLayoutPanel1.Controls)
+            {
+                TTTButton b = c as TTTButton;
+                if (b == null) continue;
+
+                b.BackgroundImage = null;
+                b.Enabled = true;
+                b.XO = null;
+
+            }
+            foreach (Control c in tableLayoutPanel1.Controls)
+            {
+                TTTButton b = c as TTTButton;
+                if (b == null) continue;
+                b.Enabled = false;
+            }
+            TTTButton[] buttonArr = replay.ToArray();
+            bool turn = true;
+            for(int i = 0 ;i<buttonArr.Length; i++)
+            {
+                if(turn)
+                {
+                    Application.DoEvents();
+                    buttonArr[i].BackgroundImage = Tic_Tac_Tor.Properties.Resources.redO;
+                }
+                else
+                {
+                    Application.DoEvents();
+                    buttonArr[i].BackgroundImage = Tic_Tac_Tor.Properties.Resources.redX;
+                }
+                turn = !turn;
+                System.Threading.Thread.Sleep(500);
+            }
+            if(whoWins == 1)
+            {
+                MessageBox.Show("Player O won", "O");
+            }
+            if (whoWins == 2)
+            {
+                MessageBox.Show("Draw", "Draw");
+            }
+            if (whoWins == 3)
+            {
+                MessageBox.Show("Player X won", "X");
+            }
+            replayButton.Show();
+            continuePlaying.Show();
+            checkBox1.Show();
+
+        }
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             reset();
@@ -203,6 +283,11 @@ namespace Tic_Tac_Tor
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ContinuePlaying_Click(object sender, EventArgs e)
+        {
+            reset();
         }
     }
 }

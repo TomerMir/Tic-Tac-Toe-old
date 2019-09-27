@@ -1,4 +1,6 @@
-﻿namespace Tic_Tac_Tor
+﻿using System.Collections.Generic;
+
+namespace Tic_Tac_Tor
 {
     partial class Form1
     {
@@ -50,6 +52,8 @@
             this.A3 = new Tic_Tac_Tor.TTTButton();
             this.A4 = new Tic_Tac_Tor.TTTButton();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.replayButton = new System.Windows.Forms.Button();
+            this.continuePlaying = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -277,11 +281,33 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
+            // replayButton
+            // 
+            this.replayButton.Location = new System.Drawing.Point(275, 0);
+            this.replayButton.Name = "replayButton";
+            this.replayButton.Size = new System.Drawing.Size(75, 23);
+            this.replayButton.TabIndex = 3;
+            this.replayButton.Text = "Replay";
+            this.replayButton.UseVisualStyleBackColor = true;
+            this.replayButton.Click += new System.EventHandler(this.ReplayButton_Click);
+            // 
+            // continuePlaying
+            // 
+            this.continuePlaying.Location = new System.Drawing.Point(194, 0);
+            this.continuePlaying.Name = "continuePlaying";
+            this.continuePlaying.Size = new System.Drawing.Size(75, 23);
+            this.continuePlaying.TabIndex = 4;
+            this.continuePlaying.Text = "Next Game";
+            this.continuePlaying.UseVisualStyleBackColor = true;
+            this.continuePlaying.Click += new System.EventHandler(this.ContinuePlaying_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(427, 450);
+            this.Controls.Add(this.continuePlaying);
+            this.Controls.Add(this.replayButton);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
@@ -321,11 +347,14 @@
         private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button replayButton;
+        private System.Windows.Forms.Button continuePlaying;
     }
 
     class TTTButton : System.Windows.Forms.Button
     {
-        public string XO; 
+        public string XO;
+
     }
 }
 
