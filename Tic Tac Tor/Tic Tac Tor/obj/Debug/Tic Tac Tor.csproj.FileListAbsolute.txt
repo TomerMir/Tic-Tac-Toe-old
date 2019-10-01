@@ -8,3 +8,13 @@ C:\Users\mtome\source\repos\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic Tac Tor.csproj
 C:\Users\mtome\source\repos\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic Tac Tor.csproj.CoreCompileInputs.cache
 C:\Users\mtome\source\repos\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic Tac Tor.exe
 C:\Users\mtome\source\repos\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic Tac Tor.pdb
+C:\Users\mtome\Desktop\Tic-Tac-Toe\Tic Tac Tor\Tic Tac Tor\bin\Debug\Tic Tac Tor.exe.config
+C:\Users\mtome\Desktop\Tic-Tac-Toe\Tic Tac Tor\Tic Tac Tor\bin\Debug\Tic Tac Tor.exe
+C:\Users\mtome\Desktop\Tic-Tac-Toe\Tic Tac Tor\Tic Tac Tor\bin\Debug\Tic Tac Tor.pdb
+C:\Users\mtome\Desktop\Tic-Tac-Toe\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic Tac Tor.csprojAssemblyReference.cache
+C:\Users\mtome\Desktop\Tic-Tac-Toe\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic_Tac_Tor.Form1.resources
+C:\Users\mtome\Desktop\Tic-Tac-Toe\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic_Tac_Tor.Properties.Resources.resources
+C:\Users\mtome\Desktop\Tic-Tac-Toe\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic Tac Tor.csproj.GenerateResource.cache
+C:\Users\mtome\Desktop\Tic-Tac-Toe\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic Tac Tor.csproj.CoreCompileInputs.cache
+C:\Users\mtome\Desktop\Tic-Tac-Toe\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic Tac Tor.exe
+C:\Users\mtome\Desktop\Tic-Tac-Toe\Tic Tac Tor\Tic Tac Tor\obj\Debug\Tic Tac Tor.pdb
