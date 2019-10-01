@@ -35,6 +35,14 @@ namespace Tic_Tac_Tor
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.replayButton = new System.Windows.Forms.Button();
+            this.continuePlaying = new System.Windows.Forms.Button();
+            this.textBox = new System.Windows.Forms.TextBox();
+            this.label = new System.Windows.Forms.Label();
+            this.play = new System.Windows.Forms.Button();
+            this.score = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.D4 = new Tic_Tac_Tor.TTTButton();
             this.D3 = new Tic_Tac_Tor.TTTButton();
             this.D2 = new Tic_Tac_Tor.TTTButton();
@@ -51,14 +59,6 @@ namespace Tic_Tac_Tor
             this.A2 = new Tic_Tac_Tor.TTTButton();
             this.A3 = new Tic_Tac_Tor.TTTButton();
             this.A4 = new Tic_Tac_Tor.TTTButton();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.replayButton = new System.Windows.Forms.Button();
-            this.continuePlaying = new System.Windows.Forms.Button();
-            this.textBox = new System.Windows.Forms.TextBox();
-            this.label = new System.Windows.Forms.Label();
-            this.play = new System.Windows.Forms.Button();
-            this.score = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -130,6 +130,86 @@ namespace Tic_Tac_Tor
             this.tableLayoutPanel1.Size = new System.Drawing.Size(427, 425);
             this.tableLayoutPanel1.TabIndex = 1;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.TableLayoutPanel1_Paint);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(96, 4);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(92, 17);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "Show Options";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
+            // 
+            // replayButton
+            // 
+            this.replayButton.Location = new System.Drawing.Point(275, 0);
+            this.replayButton.Name = "replayButton";
+            this.replayButton.Size = new System.Drawing.Size(75, 23);
+            this.replayButton.TabIndex = 3;
+            this.replayButton.Text = "Replay";
+            this.replayButton.UseVisualStyleBackColor = true;
+            this.replayButton.Click += new System.EventHandler(this.ReplayButton_Click);
+            // 
+            // continuePlaying
+            // 
+            this.continuePlaying.Location = new System.Drawing.Point(194, 0);
+            this.continuePlaying.Name = "continuePlaying";
+            this.continuePlaying.Size = new System.Drawing.Size(75, 23);
+            this.continuePlaying.TabIndex = 4;
+            this.continuePlaying.Text = "Next Game";
+            this.continuePlaying.UseVisualStyleBackColor = true;
+            this.continuePlaying.Click += new System.EventHandler(this.ContinuePlaying_Click);
+            // 
+            // textBox
+            // 
+            this.textBox.Location = new System.Drawing.Point(292, 1);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(132, 20);
+            this.textBox.TabIndex = 5;
+            this.textBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
+            // 
+            // label
+            // 
+            this.label.AutoSize = true;
+            this.label.Location = new System.Drawing.Point(199, 5);
+            this.label.Name = "label";
+            this.label.Size = new System.Drawing.Size(87, 13);
+            this.label.TabIndex = 6;
+            this.label.Text = "Enter your name:";
+            // 
+            // play
+            // 
+            this.play.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.play.Location = new System.Drawing.Point(112, 133);
+            this.play.Name = "play";
+            this.play.Size = new System.Drawing.Size(200, 150);
+            this.play.TabIndex = 7;
+            this.play.Text = "Play";
+            this.play.UseVisualStyleBackColor = true;
+            this.play.Click += new System.EventHandler(this.Play_Click);
+            // 
+            // score
+            // 
+            this.score.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.score.Location = new System.Drawing.Point(161, 350);
+            this.score.Name = "score";
+            this.score.Size = new System.Drawing.Size(100, 60);
+            this.score.TabIndex = 8;
+            this.score.Text = "Scores";
+            this.score.UseVisualStyleBackColor = true;
+            this.score.Click += new System.EventHandler(this.Score_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1870, 1000);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Algoritim";
+            this.label1.Click += new System.EventHandler(this.label1Click);
             // 
             // D4
             // 
@@ -276,84 +356,6 @@ namespace Tic_Tac_Tor
             this.A4.TabIndex = 3;
             this.A4.UseVisualStyleBackColor = true;
             this.A4.Click += new System.EventHandler(this.button_click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(96, 4);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(92, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Show Options";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
-            // 
-            // replayButton
-            // 
-            this.replayButton.Location = new System.Drawing.Point(275, 0);
-            this.replayButton.Name = "replayButton";
-            this.replayButton.Size = new System.Drawing.Size(75, 23);
-            this.replayButton.TabIndex = 3;
-            this.replayButton.Text = "Replay";
-            this.replayButton.UseVisualStyleBackColor = true;
-            this.replayButton.Click += new System.EventHandler(this.ReplayButton_Click);
-            // 
-            // continuePlaying
-            // 
-            this.continuePlaying.Location = new System.Drawing.Point(194, 0);
-            this.continuePlaying.Name = "continuePlaying";
-            this.continuePlaying.Size = new System.Drawing.Size(75, 23);
-            this.continuePlaying.TabIndex = 4;
-            this.continuePlaying.Text = "Next Game";
-            this.continuePlaying.UseVisualStyleBackColor = true;
-            this.continuePlaying.Click += new System.EventHandler(this.ContinuePlaying_Click);
-            // 
-            // textBox
-            // 
-            this.textBox.Location = new System.Drawing.Point(292, 1);
-            this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(132, 20);
-            this.textBox.TabIndex = 5;
-            this.textBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
-            // 
-            // label
-            // 
-            this.label.AutoSize = true;
-            this.label.Location = new System.Drawing.Point(199, 5);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(87, 13);
-            this.label.TabIndex = 6;
-            this.label.Text = "Enter your name:";
-            // 
-            // play
-            // 
-            this.play.Location = new System.Drawing.Point(112, 133);
-            this.play.Name = "play";
-            this.play.Size = new System.Drawing.Size(200, 150);
-            this.play.TabIndex = 7;
-            this.play.Text = "Play";
-            this.play.UseVisualStyleBackColor = true;
-            this.play.Click += new System.EventHandler(this.Play_Click);
-            // 
-            // score
-            // 
-            this.score.Location = new System.Drawing.Point(161, 350);
-            this.score.Name = "score";
-            this.score.Size = new System.Drawing.Size(100, 60);
-            this.score.TabIndex = 8;
-            this.score.Text = "Scores";
-            this.score.UseVisualStyleBackColor = true;
-            this.score.Click += new System.EventHandler(this.Score_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1870, 1000);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Algoritim";
-            this.label1.Click += new System.EventHandler(this.label1Click);
             // 
             // Form1
             // 

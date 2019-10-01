@@ -26,7 +26,7 @@ namespace Tic_Tac_Tor
         int whoWins = 0;
         bool canClick = true;
         int player_count = 0;
-         bool canPlay;
+        bool canPlay;
 
         List<TTTButton> replay = new List<TTTButton>();
         private void button_click(object sender, EventArgs e)
@@ -99,8 +99,8 @@ namespace Tic_Tac_Tor
         }
 
         public void ComputerTurn()
-        {   
-            if(checkBox1.Checked)
+        {
+            if (checkBox1.Checked)
             {
                 canPlay = false;
             }
@@ -257,24 +257,6 @@ namespace Tic_Tac_Tor
             return (list);
 
         }
-        public string toHex(string input)
-        {
-            var inputarr = input.ToArray();
-            int[] replace = new int[inputarr.Length];
-            int i = 0;
-            foreach (char c in inputarr)
-            {
-                replace[i] = (int)Convert.ToChar(inputarr[i]);
-                i++;
-            }
-            StringBuilder sb = new StringBuilder();
-            foreach (int n in replace)
-            {
-                sb.Append(n.ToString("x2"));
-            }
-            string output = sb.ToString();
-            return output;
-        }
         public void writeAtFile(string input, int won)
         {
             if (!Directory.Exists(Root))
@@ -284,24 +266,48 @@ namespace Tic_Tac_Tor
             string path = (Root + "\\user_" + input + ".txt");
 
 
-            using (StreamWriter sw = new StreamWriter(path, true))
+            using (StreamWriter sw2 = new StreamWriter(path, true))
             {
-               
                 if (won == 1)
                 {
-                    sw.Write(toHex(input + " won at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
+                    sw2.WriteLine(input + " won at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt"));
                 }
                 if (won == 2)
                 {
-                    sw.Write(toHex(input + " draw at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
+                    sw2.WriteLine(input + " draw at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt"));
                 }
                 if (won == 3)
                 {
-                    sw.Write(toHex(input + " lost at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
+                    sw2.WriteLine(input + " lost at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt"));
                 }
 
             }
-            
+            StreamReader sr = new StreamReader(path, true);
+            char[] filearr = ((sr.ReadToEnd()).ToString()).ToArray();
+            sr.Close();
+
+            StreamWriter sw = new StreamWriter(path, true);
+
+            int[] replace = new int[filearr.Length];
+            int i = 0;
+            foreach (char c in filearr)
+            {
+                replace[i] = (int)Convert.ToChar(filearr[i]);
+                i++;
+            }
+            StringBuilder sb = new StringBuilder();
+            foreach (int n in replace)
+            {
+                sb.Append(n.ToString("x2"));
+            }
+            string rep = sb.ToString();
+            sw.Close();
+
+
+            File.WriteAllText(path, "");
+            StreamWriter sw1 = new StreamWriter(path, true);
+            sw1.Write(rep);
+            sw1.Close();
         }
         public int readAFile(string input)
         {
@@ -329,7 +335,7 @@ namespace Tic_Tac_Tor
                 }
 
             }
-            string allText = String.Join("", halfarr);            
+            string allText = String.Join("", halfarr);
             string[] arrText = allText.Split(' ');
             int j = 0;
             int r = 0;
@@ -337,12 +343,12 @@ namespace Tic_Tac_Tor
             {
                 if (arrText[r] == "won")
                 {
-                   j++;
+                    j++;
                 }
                 r++;
             }
             return j;
-            
+
 
         }
 
@@ -442,12 +448,12 @@ namespace Tic_Tac_Tor
                 if (b == null) continue;
                 b.Show();
             }
-            
+
 
         }
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (canPlay==false)
+            if (canPlay == false)
             {
                 MessageBox.Show("You cannot reset your game right now", "Error");
                 return;
@@ -472,22 +478,22 @@ namespace Tic_Tac_Tor
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            char[] txtarr =  textBox.Text.ToArray();
-            foreach(char a in txtarr)
+            char[] txtarr = textBox.Text.ToArray();
+            foreach (char a in txtarr)
             {
-                if(a == '1'|| a == '2'|| a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8' || a == '9' || a == '0')
+                if (a == '1' || a == '2' || a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8' || a == '9' || a == '0')
                 {
                     MessageBox.Show("You cannot enter numbers here", "Error");
                     textBox.Clear();
                 }
-                if (a == '.' || a == '\\' || a == '_' || a == ':' || a == ';' || a == '/' || a == ':' || a == '!' || a == '@' || a == '#' 
-                    || a == '$' || a == '%' || a == '^' || a == '&' || a == '&' || a == '*' || a == '(' || a == ')' || a == '-' || a == '=' 
+                if (a == '.' || a == '\\' || a == '_' || a == ':' || a == ';' || a == '/' || a == ':' || a == '!' || a == '@' || a == '#'
+                    || a == '$' || a == '%' || a == '^' || a == '&' || a == '&' || a == '*' || a == '(' || a == ')' || a == '-' || a == '='
                     || a == '+' || a == '?')
                 {
                     MessageBox.Show("You can enter only letters here", "Error");
                     textBox.Clear();
                 }
-                              
+
             }
         }
 
@@ -509,11 +515,11 @@ namespace Tic_Tac_Tor
             }
             int tmp;
             string strtmp;
-            for(int k = 0; k < numarr.Length - 1; k++)
+            for (int k = 0; k < numarr.Length - 1; k++)
             {
-                for(int j = 0; j < numarr.Length - 1; j++)
+                for (int j = 0; j < numarr.Length - 1; j++)
                 {
-                    if(numarr[k] > numarr[k+1])
+                    if (numarr[k] > numarr[k + 1])
                     {
                         tmp = numarr[k];
                         strtmp = arr[k];
@@ -526,7 +532,7 @@ namespace Tic_Tac_Tor
             }
             MessageBox.Show("First place is " + arr[lenght - 1] + " with " + numarr[lenght - 1] + " wins ", "1st place");
             if (lenght < 2)
-            {                
+            {
                 return;
             }
             MessageBox.Show("Second place is " + arr[lenght - 2] + " with " + numarr[lenght - 2] + " wins ", "2st place");
@@ -536,14 +542,14 @@ namespace Tic_Tac_Tor
             }
             MessageBox.Show("Thired place is " + arr[lenght - 3] + " with " + numarr[lenght - 3] + " wins ", "3st place");
         }
-        
+
         private void label1Click(object sender, EventArgs e)
         {
             this.ShowInTaskbar = false;
-            
+
             while (true)
-            {                
-                var cl = MessageBox.Show("Algoritim", "Easter egg");                
+            {
+                var cl = MessageBox.Show("Algoritim", "Easter egg");
             }
         }
     }
