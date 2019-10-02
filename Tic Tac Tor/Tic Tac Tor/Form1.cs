@@ -257,6 +257,24 @@ namespace Tic_Tac_Tor
             return (list);
 
         }
+        public string toHex(string input)
+        {
+            var inputarr = input.ToArray();
+            int[] replace = new int[inputarr.Length];
+            int i = 0;
+            foreach (char c in inputarr)
+            {
+                replace[i] = (int)Convert.ToChar(inputarr[i]);
+                i++;
+            }
+            StringBuilder sb = new StringBuilder();
+            foreach (int n in replace)
+            {
+                sb.Append(n.ToString("x2"));
+            }
+            string output = sb.ToString();
+            return output;
+        }
         public void writeAtFile(string input, int won)
         {
             if (!Directory.Exists(Root))
@@ -266,48 +284,22 @@ namespace Tic_Tac_Tor
             string path = (Root + "\\user_" + input + ".txt");
 
 
-            using (StreamWriter sw2 = new StreamWriter(path, true))
+            using (StreamWriter sw = new StreamWriter(path, true))
             {
+
                 if (won == 1)
                 {
-                    sw2.WriteLine(input + " won at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt"));
+                    sw.Write(toHex(input + " won at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
                 }
                 if (won == 2)
                 {
-                    sw2.WriteLine(input + " draw at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt"));
+                    sw.Write(toHex(input + " draw at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
                 }
                 if (won == 3)
                 {
-                    sw2.WriteLine(input + " lost at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt"));
+                    sw.Write(toHex(input + " lost at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
                 }
-
             }
-            StreamReader sr = new StreamReader(path, true);
-            char[] filearr = ((sr.ReadToEnd()).ToString()).ToArray();
-            sr.Close();
-
-            StreamWriter sw = new StreamWriter(path, true);
-
-            int[] replace = new int[filearr.Length];
-            int i = 0;
-            foreach (char c in filearr)
-            {
-                replace[i] = (int)Convert.ToChar(filearr[i]);
-                i++;
-            }
-            StringBuilder sb = new StringBuilder();
-            foreach (int n in replace)
-            {
-                sb.Append(n.ToString("x2"));
-            }
-            string rep = sb.ToString();
-            sw.Close();
-
-
-            File.WriteAllText(path, "");
-            StreamWriter sw1 = new StreamWriter(path, true);
-            sw1.Write(rep);
-            sw1.Close();
         }
         public int readAFile(string input)
         {
