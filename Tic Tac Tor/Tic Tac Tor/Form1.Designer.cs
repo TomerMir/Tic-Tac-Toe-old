@@ -43,6 +43,11 @@ namespace Tic_Tac_Tor
             this.play = new System.Windows.Forms.Button();
             this.score = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.level1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.level2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.level3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.level4 = new System.Windows.Forms.ToolStripMenuItem();
             this.D4 = new Tic_Tac_Tor.TTTButton();
             this.D3 = new Tic_Tac_Tor.TTTButton();
             this.D2 = new Tic_Tac_Tor.TTTButton();
@@ -76,6 +81,7 @@ namespace Tic_Tac_Tor
             // applicationToolStripMenuItem
             // 
             this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.levelToolStripMenuItem,
             this.newGameToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
@@ -85,14 +91,14 @@ namespace Tic_Tac_Tor
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newGameToolStripMenuItem.Text = "New Game";
             this.newGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -210,6 +216,45 @@ namespace Tic_Tac_Tor
             this.label1.TabIndex = 9;
             this.label1.Text = "Algoritim";
             this.label1.Click += new System.EventHandler(this.label1Click);
+            // 
+            // levelToolStripMenuItem
+            // 
+            this.levelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.level1,
+            this.level2,
+            this.level3,
+            this.level4});
+            this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
+            this.levelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.levelToolStripMenuItem.Text = "Level";
+            // 
+            // level1
+            // 
+            this.level1.Name = "level1";
+            this.level1.Size = new System.Drawing.Size(180, 22);
+            this.level1.Text = "1";
+            this.level1.Click += new System.EventHandler(this.Level1_Click);
+            // 
+            // level2
+            // 
+            this.level2.Name = "level2";
+            this.level2.Size = new System.Drawing.Size(180, 22);
+            this.level2.Text = "2";
+            this.level2.Click += new System.EventHandler(this.Level2_Click);
+            // 
+            // level3
+            // 
+            this.level3.Name = "level3";
+            this.level3.Size = new System.Drawing.Size(180, 22);
+            this.level3.Text = "3";
+            this.level3.Click += new System.EventHandler(this.Level3_Click);
+            // 
+            // level4
+            // 
+            this.level4.Name = "level4";
+            this.level4.Size = new System.Drawing.Size(180, 22);
+            this.level4.Text = "4";
+            this.level4.Click += new System.EventHandler(this.Level4_Click);
             // 
             // D4
             // 
@@ -415,12 +460,11 @@ namespace Tic_Tac_Tor
         private System.Windows.Forms.Button play;
         private System.Windows.Forms.Button score;
         private System.Windows.Forms.Label label1;
-    }
-
-    class TTTButton : System.Windows.Forms.Button
-    {
-        public string XO;
-
+        private System.Windows.Forms.ToolStripMenuItem levelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem level1;
+        private System.Windows.Forms.ToolStripMenuItem level2;
+        private System.Windows.Forms.ToolStripMenuItem level3;
+        private System.Windows.Forms.ToolStripMenuItem level4;
     }
 }
 

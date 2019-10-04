@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Tic_Tac_Tor
 {
@@ -27,10 +28,13 @@ namespace Tic_Tac_Tor
         bool canClick = true;
         int player_count = 0;
         bool canPlay;
+        int level = 10;
+        bool canChangeLevel = true;
 
         List<TTTButton> replay = new List<TTTButton>();
         private void button_click(object sender, EventArgs e)
         {
+            canChangeLevel = false;
             if (canClick == false)
             {
                 return;
@@ -45,7 +49,7 @@ namespace Tic_Tac_Tor
             TTTButton button = sender as TTTButton;
             player_count++;
 
-            button.XO = "X";
+            button.XO = "O";
             button.BackgroundImage = Tic_Tac_Tor.Properties.Resources.redO;
             button.Enabled = false;
             replay.Add(button);
@@ -58,6 +62,7 @@ namespace Tic_Tac_Tor
                 MessageBox.Show("Player O is the winner", "We have a winner");
                 replayButton.Show();
                 continuePlaying.Show();
+                canChangeLevel = true;
                 return;
             }
 
@@ -69,10 +74,44 @@ namespace Tic_Tac_Tor
                 writeAtFile(textBox.Text, 2);
                 replayButton.Show();
                 continuePlaying.Show();
+                canChangeLevel = true;
                 return;
             }
 
-            ComputerTurn();
+            if(level == 10)
+            {
+                level = 3;
+            }
+            TTTButton[] bArr = Butarr();
+            List<TTTButton>[] buttonsScores = new List<TTTButton>[3] { new List<TTTButton>(), new List<TTTButton>(), new List<TTTButton>() };
+            Random random = new Random();
+            foreach (TTTButton button1 in bArr)
+            {
+                button1.XO = "X";
+                int score = minMax(level, true);
+                button1.XO = null;
+                buttonsScores[score + 1].Add(button1);
+            }
+            for(int i = 0; i<= 2; i++)
+            {
+                int nScores = buttonsScores[i].Count;
+                if (nScores > 0)
+                {
+                    int iBtn = random.Next(0, nScores);
+                    TTTButton b = buttonsScores[i][iBtn];
+                    b.BackgroundImage = Tic_Tac_Tor.Properties.Resources.redX;
+                    b.Enabled = false;
+                    b.XO = "X";
+                    player_count++;
+                    replay.Add(b);
+                    canClick = true;
+                    canPlay = true;
+                    break;
+                }
+
+            }
+
+
 
             if (checkForAWinner())
             {
@@ -82,6 +121,7 @@ namespace Tic_Tac_Tor
                 writeAtFile(textBox.Text, 3);
                 replayButton.Show();
                 continuePlaying.Show();
+                canChangeLevel = true;
                 return;
             }
 
@@ -93,106 +133,89 @@ namespace Tic_Tac_Tor
                 writeAtFile(textBox.Text, 2);
                 replayButton.Show();
                 continuePlaying.Show();
+                canChangeLevel = true;
                 return;
 
             }
         }
-
-        public void ComputerTurn()
+        public TTTButton[] Butarr()
         {
-            if (checkBox1.Checked)
-            {
-                canPlay = false;
-            }
-            canClick = false;
+            List<TTTButton> butlist = new List<TTTButton>();
             foreach (Control c in tableLayoutPanel1.Controls)
             {
                 TTTButton b = c as TTTButton;
                 if (b == null) continue;
-                if (b.Enabled)
+                if (b.XO == null)
+                {
+                    butlist.Add(b);
+                }
+            }
+            TTTButton[] arr = butlist.ToArray();
+            return arr;
+        }
+        public int minMax(int depht, bool isMax)
+        {
+            if (checkBox1.Checked)
+            {
+                canClick = false;
+            }
+            canPlay = false;
+            if (checkForAWinner())
+            {
+                if (isMax)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 1;
+                }                
+            }
+            if (depht == 0)
+            {
+                return 0;
+            }
+            if (isMax)
+            {
+                int max = -1;
+                foreach (TTTButton b in Butarr())
                 {
                     if (checkBox1.Checked)
                     {
                         b.BackgroundImage = Tic_Tac_Tor.Properties.Resources.redO;
                         Application.DoEvents();
-                        System.Threading.Thread.Sleep(50);
+                        System.Threading.Thread.Sleep(10);
                     }
                     b.XO = "O";
-                    if (checkForAWinner())
-                    {
-                        b.BackgroundImage = Tic_Tac_Tor.Properties.Resources.redX;
-                        b.Enabled = false;
-                        player_count++;
-                        replay.Add(b);
-                        canClick = true;
-                        canPlay = true;
-                        return;
-                    }
-                    else
-                    {
-                        b.XO = null;
-                        b.BackgroundImage = null;
-                    }
+                    int call = minMax(depht - 1, false);
+                    b.XO = null;
+                    b.BackgroundImage = null;
+                    max = Math.Max(max, call);
+                    if (max == 1) break; 
+                }
+                return max;
+            }
+            else
+            {
+                int min = 1;
+                foreach (TTTButton b in Butarr())
+                {
                     if (checkBox1.Checked)
                     {
                         b.BackgroundImage = Tic_Tac_Tor.Properties.Resources.redX;
                         Application.DoEvents();
-                        System.Threading.Thread.Sleep(50);
+                        System.Threading.Thread.Sleep(10);
                     }
                     b.XO = "X";
-                    if (checkForAWinner())
-                    {
-                        b.BackgroundImage = Tic_Tac_Tor.Properties.Resources.redX;
-                        b.Enabled = false;
-                        b.XO = "O";
-                        player_count++;
-                        replay.Add(b);
-                        canClick = true;
-                        canPlay = true;
-                        return;
-                    }
-                    else
-                    {
-                        b.XO = null;
-                        b.BackgroundImage = null;
-                    }
+                    int call = minMax(depht - 1, true);
+                    b.XO = null;
+                    b.BackgroundImage = null;
+                    min = Math.Min(min, call);
+                    if (min == -1) break; 
                 }
-            }
+                return min;
 
-            Random random = new Random();
-            int tmp = 0;
-            List<int> enabledButtons = new List<int>();
-            foreach (Control c in tableLayoutPanel1.Controls)
-            {
-                TTTButton b = c as TTTButton;
-                if (b == null) continue;
-                if (b.Enabled == true)
-                {
-                    enabledButtons.Add(tmp);
-                }
-                tmp++;
             }
-            int tmprand = random.Next(0, ((enabledButtons.ToArray()).Length));
-            int rand = enabledButtons.ToArray()[tmprand];
-            int anotherTmp = 0;
-            foreach (Control c in tableLayoutPanel1.Controls)
-            {
-                TTTButton b = c as TTTButton;
-                if (b == null) continue;
-                if (rand == anotherTmp)
-                {
-                    b.BackgroundImage = Tic_Tac_Tor.Properties.Resources.redX;
-                    b.XO = "O";
-                    b.Enabled = false;
-                    player_count++;
-                    replay.Add(b);
-                    canClick = true;
-                    canPlay = true;
-                    return;
-                }
-                anotherTmp++;
-            }
-
         }
 
 
@@ -237,13 +260,14 @@ namespace Tic_Tac_Tor
             continuePlaying.Hide();
             replay.Clear();
             whoWins = 0;
+            canChangeLevel = true;
         }
 
         const string Root = "c:\\Users\\Public\\TicTacToe\\";
         public List<string> highScores()
         {
-            Regex extractName = new Regex(".*user_(.*)\\.txt");
-            var userFiles = Directory.GetFiles(Root, "user_*.txt");
+            Regex extractName = new Regex("user_(.*)\\.txt");
+            string[] userFiles = Directory.GetFiles(Root, "user_*.txt");
             List<string> list = new List<string>();
             foreach (var fileName in userFiles)
             {
@@ -255,7 +279,6 @@ namespace Tic_Tac_Tor
                 }
             }
             return (list);
-
         }
         public string toHex(string input)
         {
@@ -270,7 +293,7 @@ namespace Tic_Tac_Tor
             StringBuilder sb = new StringBuilder();
             foreach (int n in replace)
             {
-                sb.Append(n.ToString("x2"));
+                sb.Append(n.ToString("x"));
             }
             string output = sb.ToString();
             return output;
@@ -343,10 +366,6 @@ namespace Tic_Tac_Tor
 
 
         }
-
-
-
-
         public bool checkForAWinner()
         {
 
@@ -367,7 +386,6 @@ namespace Tic_Tac_Tor
             {
                 return false;
             }
-
         }
         private void ReplayButton_Click(object sender, EventArgs e)
         {
@@ -480,7 +498,7 @@ namespace Tic_Tac_Tor
                 }
                 if (a == '.' || a == '\\' || a == '_' || a == ':' || a == ';' || a == '/' || a == ':' || a == '!' || a == '@' || a == '#'
                     || a == '$' || a == '%' || a == '^' || a == '&' || a == '&' || a == '*' || a == '(' || a == ')' || a == '-' || a == '='
-                    || a == '+' || a == '?')
+                    || a == '+' || a == '?' || a == '`' || a == '\'')
                 {
                     MessageBox.Show("You can enter only letters here", "Error");
                     textBox.Clear();
@@ -507,9 +525,9 @@ namespace Tic_Tac_Tor
             }
             int tmp;
             string strtmp;
-            for (int k = 0; k < numarr.Length - 1; k++)
+            for (int j = 1; j <= numarr.Length - 1; j++)
             {
-                for (int j = 0; j < numarr.Length - 1; j++)
+                for (int k = 0; k < numarr.Length - j; k++)
                 {
                     if (numarr[k] > numarr[k + 1])
                     {
@@ -543,6 +561,46 @@ namespace Tic_Tac_Tor
             {
                 var cl = MessageBox.Show("Algoritim", "Easter egg");
             }
+        }
+
+        private void Level1_Click(object sender, EventArgs e)
+        {
+            if (canChangeLevel == false)
+            {
+                MessageBox.Show("You can't change level right now", "Eror");
+                return;
+            }
+            level = 1;
+        }
+
+        private void Level2_Click(object sender, EventArgs e)
+        {
+            if (canChangeLevel == false)
+            {
+                MessageBox.Show("You can't change level right now", "Eror");
+                return;
+            }
+            level = 2;
+        }
+
+        private void Level3_Click(object sender, EventArgs e)
+        {
+            if (canChangeLevel == false)
+            {
+                MessageBox.Show("You can't change level right now", "Eror");
+                return;
+            }
+            level = 3;
+        }
+
+        private void Level4_Click(object sender, EventArgs e)
+        {
+            if (canChangeLevel == false)
+            {
+                MessageBox.Show("You can't change level right now", "Eror");
+                return;
+            }
+            level = 4;
         }
     }
 }
