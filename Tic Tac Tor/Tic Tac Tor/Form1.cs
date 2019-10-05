@@ -78,7 +78,7 @@ namespace Tic_Tac_Tor
                 return;
             }
 
-            if(level == 10)
+            if (level == 10)
             {
                 level = 3;
             }
@@ -92,7 +92,7 @@ namespace Tic_Tac_Tor
                 button1.XO = null;
                 buttonsScores[score + 1].Add(button1);
             }
-            for(int i = 0; i<= 2; i++)
+            for (int i = 0; i <= 2; i++)
             {
                 int nScores = buttonsScores[i].Count;
                 if (nScores > 0)
@@ -153,7 +153,7 @@ namespace Tic_Tac_Tor
             TTTButton[] arr = butlist.ToArray();
             return arr;
         }
-        public int minMax(int depht, bool isMax)
+        public int minMax(int depht, bool isMin)
         {
             if (checkBox1.Checked)
             {
@@ -162,20 +162,20 @@ namespace Tic_Tac_Tor
             canPlay = false;
             if (checkForAWinner())
             {
-                if (isMax)
+                if (isMin)
                 {
                     return -1;
                 }
                 else
                 {
                     return 1;
-                }                
+                }
             }
             if (depht == 0)
             {
                 return 0;
             }
-            if (isMax)
+            if (isMin)
             {
                 int max = -1;
                 foreach (TTTButton b in Butarr())
@@ -191,7 +191,7 @@ namespace Tic_Tac_Tor
                     b.XO = null;
                     b.BackgroundImage = null;
                     max = Math.Max(max, call);
-                    if (max == 1) break; 
+                    if (max == 1) break;
                 }
                 return max;
             }
@@ -211,7 +211,7 @@ namespace Tic_Tac_Tor
                     b.XO = null;
                     b.BackgroundImage = null;
                     min = Math.Min(min, call);
-                    if (min == -1) break; 
+                    if (min == -1) break;
                 }
                 return min;
 
@@ -309,19 +309,24 @@ namespace Tic_Tac_Tor
 
             using (StreamWriter sw = new StreamWriter(path, true))
             {
-
-                if (won == 1)
+                switch (won)
                 {
-                    sw.Write(toHex(input + " won at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
-                }
-                if (won == 2)
-                {
-                    sw.Write(toHex(input + " draw at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
-                }
-                if (won == 3)
-                {
-                    sw.Write(toHex(input + " lost at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
-                }
+                    case 1:
+                    {
+                        sw.Write(toHex(input + " won at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
+                        break;
+                    }
+                    case 2:
+                        {
+                            sw.Write(toHex(input + " draw at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
+                            break;
+                        }
+                    case 3:
+                        {
+                            sw.Write(toHex(input + " lost at " + DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + "\n"));
+                            break;
+                        }
+                }                                                   
             }
         }
         public int readAFile(string input)
@@ -559,7 +564,7 @@ namespace Tic_Tac_Tor
 
             while (true)
             {
-                var cl = MessageBox.Show("Algoritim", "Easter egg");
+                var cl = MessageBox.Show("Easter egg", "Easter egg");
             }
         }
 
@@ -600,7 +605,7 @@ namespace Tic_Tac_Tor
                 MessageBox.Show("You can't change level right now", "Eror");
                 return;
             }
-            level = 4;
+            level = 5;
         }
     }
 }
